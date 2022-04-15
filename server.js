@@ -10,6 +10,7 @@ app.use(express.json());
 
 
 app.post("/compile", (req, res) => {
+	console.log("inside post");
 	//getting the required data from the request
 	let code = req.body.code;
 	let language = req.body.language;
@@ -36,16 +37,16 @@ app.post("/compile", (req, res) => {
 	Axios(config)
 		.then((response)=>{
 			res.send(response.data)
-			//console.log(response.data)
+			console.log(response.data)
 		}).catch((error)=>{
 			res.send(error);
+			console.log("nside error");
 		});
 })
 
 if (process.env.NODE_ENV === 'production') {
 	// Exprees will serve up production assets
 	app.use(express.static('client/build'));
-	console.log("yes! hello world");
   
 	// Express serve up index.html file if it doesn't recognize route
 	// app.get('*', (req, res) => {
@@ -53,7 +54,6 @@ if (process.env.NODE_ENV === 'production') {
 	// });
   }
 
-  console.log("No! hello world");
 app.listen(process.env.PORT || PORT, () => {
 	console.log(`Server listening on port ${PORT}`);
 });

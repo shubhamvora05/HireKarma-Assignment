@@ -43,12 +43,14 @@ function compile() {
 	}
 
 	// Post request to compile endpoint
-	Axios.post(`http://localhost:8000/compile`, {
+	Axios.post(`https://codecompiler1.herokuapp.com/compile`, {
 	code: userCode,
 	language: userLang,
 	input: userInput }).then((res) => {
+		console.log("sent for output");
 	setUserOutput(res.data.output);
 	}).then(() => {
+		console.log("output recived");
 	setLoading(false);
 	})
 }
